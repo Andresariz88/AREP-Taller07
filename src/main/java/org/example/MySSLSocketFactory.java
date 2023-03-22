@@ -8,8 +8,11 @@ import javax.net.ssl.*;
 public class MySSLSocketFactory {
     public static SSLSocketFactory getSocketFactory() throws Exception {
 
-        File trustStoreFile = new File("certificados/webAppTrustStore.p12");
-        char[] trustStorePassword = "ecikeypair".toCharArray();
+        //File trustStoreFile = new File("certificados/webAppTrustStore.p12");
+        //char[] trustStorePassword = "ecikeypair".toCharArray();
+
+        File trustStoreFile = new File("certificados/webAppTrustStoreAWS.p12");
+        char[] trustStorePassword = "apikeypairAWS".toCharArray();
 
         // Load the trust store, the default type is "pkcs12", the alternative is "jks"
         KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());

@@ -24,14 +24,14 @@ public class RemoteServer {
         if (System.getenv("KEYSTORE") != null) {
             return System.getenv("KEYSTORE");
         }
-        return "certificados/apikeypair.p12";
+        return "certificados/apikeypairAWS.p12";
     }
 
     static String getPasswordKeyStore() {
         if (System.getenv("KEYSTOREPW") != null) {
             return System.getenv("KEYSTOREPW");
         }
-        return "apikeypair";
+        return "apikeypairAWS";
     }
 
 }

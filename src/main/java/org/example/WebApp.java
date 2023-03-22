@@ -14,7 +14,7 @@ public class WebApp {
          secure(getKeyStore(), getPasswordKeyStore(), null, null);
 
         port(getPort());
-        get("/hello", (req, res) -> getHttps());
+        get("/", (req, res) -> getHttps());
     }
 
     /**
@@ -23,7 +23,7 @@ public class WebApp {
      * @throws Exception
      */
     public static String getHttps() throws Exception {
-        String httpsURL = "https://localhost:5002";
+        String httpsURL = "https://ec2-54-82-213-170.compute-1.amazonaws.com:5002";
         URL myURL = new URL(httpsURL);
         HttpsURLConnection conn = (HttpsURLConnection) myURL.openConnection();
 
@@ -53,14 +53,17 @@ public class WebApp {
         if (System.getenv("KEYSTORE") != null) {
             return System.getenv("KEYSTORE");
         }
-        return "certificados/ecikeystore.p12";
+        //return "certificados/ecikeystore.p12";
+        return "certificados/webkeypairAWS.p12";
     }
 
     static String getPasswordKeyStore() {
         if (System.getenv("KEYSTOREPW") != null) {
             return System.getenv("KEYSTOREPW");
         }
-        return "123456";
+        //return "123456";
+        return "webkeypairAWS";
+
     }
 }
 
