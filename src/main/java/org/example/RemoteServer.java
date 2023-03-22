@@ -1,23 +1,5 @@
 package org.example;
 
-
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.TrustManagerFactory;
-import java.io.*;
-import java.net.URL;
-import java.net.URLConnection;
-import java.security.KeyManagementException;
-import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.cert.CertificateException;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import static spark.Spark.*;
 
 public class RemoteServer {
@@ -43,7 +25,6 @@ public class RemoteServer {
             return System.getenv("KEYSTORE");
         }
         return "certificados/apikeypair.p12";
-        //return "certificados/ecikeystore.p12";
     }
 
     static String getPasswordKeyStore() {
@@ -51,7 +32,6 @@ public class RemoteServer {
             return System.getenv("KEYSTOREPW");
         }
         return "apikeypair";
-        //return "123456";
     }
 
 }

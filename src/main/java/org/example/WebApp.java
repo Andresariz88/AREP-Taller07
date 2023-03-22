@@ -2,10 +2,7 @@ package org.example;
 
 import static spark.Spark.*;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import java.io.*;
@@ -13,16 +10,18 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class WebApp {
 
-    private static final String USER_AGENT = "Mozilla/5.0";
-
     public static void main(String[] args) throws Exception {
          secure(getKeyStore(), getPasswordKeyStore(), null, null);
 
         port(getPort());
         get("/hello", (req, res) -> getHttps());
-        //getHttps();
     }
 
+    /**
+     * Hace conexión HTTPS con un SSL context específico (webAppTrustStore.p12)
+     * @return respuesta HTTPS del servidor
+     * @throws Exception
+     */
     public static String getHttps() throws Exception {
         String httpsURL = "https://localhost:5002";
         URL myURL = new URL(httpsURL);
@@ -41,31 +40,6 @@ public class WebApp {
         in.close();
         return response.toString();
 
-    }
-
-    public static String getHello() throws IOException {
-        URL obj = new URL("http://localhost:5002");
-        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-        con.setRequestMethod("GET");
-        con.setRequestProperty("User-Agent", USER_AGENT);
-        int responseCode = con.getResponseCode();
-        System.out.println("GET Response Code :: " + responseCode);
-        if (responseCode == HttpURLConnection.HTTP_OK) { // success
-            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            String inputLine;
-            StringBuffer response = new StringBuffer();
-
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-            in.close();
-
-            System.out.println(response + "\n");
-            return response.toString();
-        } else {
-            System.out.println("GET request did not work.");
-            return "";
-        }
     }
 
     static int getPort() {
