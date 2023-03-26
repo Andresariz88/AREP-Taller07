@@ -9,7 +9,6 @@ public class RemoteServer {
         secure(getKeyStore(), getPasswordKeyStore(), null, null);
 
         port(getPort());
-        //changeTruststore();
         get("/", (req, res) -> "Hello from Remote Server");
     }
 
@@ -24,6 +23,7 @@ public class RemoteServer {
         if (System.getenv("KEYSTORE") != null) {
             return System.getenv("KEYSTORE");
         }
+        //return "certificados/apikeypair.p12";
         return "certificados/apikeypairAWS.p12";
     }
 
@@ -31,6 +31,7 @@ public class RemoteServer {
         if (System.getenv("KEYSTOREPW") != null) {
             return System.getenv("KEYSTOREPW");
         }
+        //return "apikeypair";
         return "apikeypairAWS";
     }
 
